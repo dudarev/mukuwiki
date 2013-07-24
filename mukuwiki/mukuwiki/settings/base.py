@@ -1,5 +1,24 @@
 # Django settings for mukuwiki project.
 
+from os.path import abspath, basename, dirname, join, normpath
+from sys import path
+
+# from https://github.com/twoscoops/django-twoscoops-project
+########## PATH CONFIGURATION
+# Absolute filesystem path to the Django project directory:
+DJANGO_ROOT = dirname(dirname(dirname(abspath(__file__))))
+
+# Absolute filesystem path to the top-level project folder:
+SITE_ROOT = dirname(DJANGO_ROOT)
+
+# Site name:
+SITE_NAME = basename(DJANGO_ROOT)
+
+# Add our project to our pythonpath, this way we don't need to type our project
+# name in our dotted import paths:
+path.append(DJANGO_ROOT)
+########## END PATH CONFIGURATION
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,8 +30,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': normpath(join(SITE_ROOT, 'mukuwiki.db')), # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -107,10 +126,9 @@ ROOT_URLCONF = 'mukuwiki.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'mukuwiki.wsgi.application'
 
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    normpath(join(DJANGO_ROOT, 'templates')),
 )
 
 INSTALLED_APPS = (
@@ -124,6 +142,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'social_auth',
+    'core',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,3 +174,16 @@ LOGGING = {
         },
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL          = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
