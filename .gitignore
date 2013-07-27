@@ -3,3 +3,4 @@ progress.db
 *.pyc
 mukuwiki.db
 mukuwiki/mukuwiki/settings/twitter.py
+mukuwiki/mukuwiki/settings/github.py

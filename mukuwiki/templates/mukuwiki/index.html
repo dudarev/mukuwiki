@@ -6,4 +6,5 @@ Logged in as {{ user.username }}.
 {% else %}
 Not logged in.
 <a href="{% url "socialauth_begin" "twitter" %}{% if next %}?next={{ next }}{% endif %}">Login with Twitter</a>
+<a href="{% url "socialauth_begin" "github" %}{% if next %}?next={{ next }}{% endif %}">Login with Github</a>
 {% endif %}
