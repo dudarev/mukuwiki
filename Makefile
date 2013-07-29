@@ -5,3 +5,6 @@ MANAGE= PYTHONPATH=$(PYTHONPATH) python $(PROJECT_NAME)/manage.py
 
 runserver:
 	$(MANAGE) runserver
+
+syncdb:
+	$(MANAGE) syncdb
