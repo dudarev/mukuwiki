@@ -1,4 +1,10 @@
-Hello world!
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 
 {% if user.username %}
@@ -14,8 +20,8 @@ Not logged in.
 {% endif %}
 
 <p>
-{% if not is_github_associated %}
-To user mukuwiki <a href="{% url "socialauth_begin" "github" %}{% if next %}?next={{ next }}{% endif %}">associate Github account</a>.
+{% if user.username and not is_github_associated %}
+To use mukuwiki <a href="{% url "socialauth_begin" "github" %}{% if next %}?next={{ next }}{% endif %}">associate Github account</a>.
 {% endif %}
 </p>
 

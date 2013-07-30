@@ -187,7 +187,8 @@ SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 
 SOCIAL_AUTH_PIPELINE = (
-    'core.pipeline.check_github',
+    'core.pipeline.check_before_associating_github',
+    'core.pipeline.check_logged_in_with_twitter',
     'social_auth.backends.pipeline.social.social_auth_user',
     'social_auth.backends.pipeline.user.get_username',
     'social_auth.backends.pipeline.user.create_user',
