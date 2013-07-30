@@ -37,10 +37,6 @@ heroku config:add DJANGO_SETTINGS_MODULE=mukuwiki.settings.heroku
 ## Set up secret keys
 
 ```
-heroku config:set INSTAGRAM_CLIENT_ID=YOUR_INSTAGRAM_CLIENT_ID
-heroku config:set INSTAGRAM_CLIENT_SECRET=YOUR_INSTAGRAM_CLIENT_SECRET
-```
-```
 heroku config:set TWITTER_CONSUMER_KEY=
 heroku config:set TWITTER_CONSUMER_SECRET=
 heroku config:set GITHUB_APP_ID=
