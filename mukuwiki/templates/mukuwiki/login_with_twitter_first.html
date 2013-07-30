@@ -1,0 +1,14 @@
+{% if user.username %}
+
+Logged in as {{ user.username }}.
+
+{% else %}
+
+Not logged in.
+<a href="{% url "socialauth_begin" "twitter" %}{% if next %}?next={{ next }}{% endif %}">Login with Twitter</a>
+
+{% endif %}
+
+Go to 
+<a href="{% url 'home' %}">home page</a>.
+
