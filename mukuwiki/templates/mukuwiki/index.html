@@ -1,8 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<h1>MukuWiki</h1>
+
+<h2>Short Quick Connected Notes</h2>
+
 {% if messages %}
 <ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
 </ul>
 {% endif %}
 
@@ -25,3 +36,15 @@ To use mukuwiki <a href="{% url "socialauth_begin" "github" %}{% if next %}?next
 {% endif %}
 </p>
 
+<p>
+Interested in news about MukuWiki? Subscribe via email:
+
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input value="Send" type="submit">
+</form>
+</p>
+
+</body>
+</html>
