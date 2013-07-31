@@ -36,6 +36,12 @@ heroku config:add DJANGO_SETTINGS_MODULE=mukuwiki.settings.heroku
 
 ## Set up secret keys
 
+[Register new Twitter app](https://dev.twitter.com/apps/new)
+
+[Register new Github app](https://github.com/settings/applications) (click button "Regsiter new application").
+
+Callback URLs end with `/complete/<backend>/`, where `<backend>` is `twitter` or `github` correspondingly.
+
 ```
 heroku config:set TWITTER_CONSUMER_KEY=YOUR_TWITTER_CONSUMER_KEY
 heroku config:set TWITTER_CONSUMER_SECRET=YOUR_TWITTER_CONSUMER_SECRET
