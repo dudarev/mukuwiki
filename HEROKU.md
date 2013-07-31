@@ -42,3 +42,9 @@ heroku config:set TWITTER_CONSUMER_SECRET=YOUR_TWITTER_CONSUMER_SECRET
 heroku config:set GITHUB_APP_ID=YOUR_GITHUB_APP_ID
 heroku config:set GITHUB_API_SECRET=YOUR_GITHUB_API_SECRET
 ```
+
+## Sync database
+
+```
+heroku run python mukuwiki/manage.py syncdb
+```
