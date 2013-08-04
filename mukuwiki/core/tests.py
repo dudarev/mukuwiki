@@ -66,9 +66,15 @@ class UserAssociationTest(LiveServerTestCase):
         self.browser.get(self.live_server_url)
         body = self.browser.find_element_by_tag_name('body')
 
-        # a text requesting to associate Github is there
+        # text requesting to associate Github is there
         self.assertIn(self.association_request_string, body.text)
 
-        # connect Github, text is not there
+        # connect Github
         self.github_social_user = SocialUserFactory.create(user=self.user, provider='github')
+
+        # reload home page
+        self.browser.get(self.live_server_url)
+        body = self.browser.find_element_by_tag_name('body')
+
+        # text is not there
         self.assertNotIn(self.association_request_string, body.text)
