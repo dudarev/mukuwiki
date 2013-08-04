@@ -25,23 +25,20 @@ class HomeView(CreateView):
         form.instance.user = self.request.user
         return super(HomeView, self).form_valid(form)
 
-    def dispatch(self, request, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         """
         Adds `is_github_associated` variable to template.
         """
-
+        context = super(HomeView, self).get_context_data(**kwargs)
         is_github_associated = False
-        if request.user and request.user.is_authenticated():
-            associated_users_list = request.user.social_auth.all()
+        if self.request.user and self.request.user.is_authenticated():
+            associated_users_list = self.request.user.social_auth.all()
             for u in associated_users_list:
                 if u.provider == 'github':
                     is_github_associated = True
                     break
-        return super(HomeView, self).dispatch(
-            request,
-            is_github_associated=is_github_associated,
-            *args,
-            **kwargs)
+        context['is_github_associated'] = is_github_associated
+        return context
 
         
 class LoginWithTwitterFirstView(TemplateView):
